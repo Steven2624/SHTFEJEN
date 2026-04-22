@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Steven Clothing | Streetwear</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #050505;
+      color: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 5, 5, 0.95);
+      border-bottom: 1px solid #222;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      opacity: 0.8;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+    }
+
+    .btn-primary {
+      background: #f5f5f5;
+      color: #050505;
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+      background: #ffffff;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 2.5rem;
+      align-items: center;
+      padding: 3rem 0 4rem;
+    }
+
+    .hero-tag {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #a3a3a3;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 4vw, 3.2rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+      color: #c7c7c7;
+      max-width: 26rem;
+      margin-bottom: 1.8rem;
+      font-size: 0.98rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .btn-ghost {
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid #444;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      background: transparent;
+      color: #f5f5f5;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-ghost:hover {
+      background: #111;
+      border-color: #777;
+    }
+
+    .hero-image {
+      border-radius: 1.5rem;
+      border: 1px solid #222;
+      background: radial-gradient(circle at top left, #333 0, #050505 55%);
+      min-height: 260px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card {
+      background: rgba(5, 5, 5, 0.9);
+      border-radius: 1rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid #333;
+      max-width: 60%;
+    }
+
+    .hero-card-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-card-text {
+      font-size: 0.85rem;
+      color: #c7c7c7;
+    }
+
+    .hero-pill {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      background: rgba(245, 245, 245, 0.08);
+      border-radius: 999px;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      border: 1px solid rgba(245, 245, 245, 0.12);
+    }
+
+    /* Sections */
+    section {
+      padding: 2.5rem 0;
+      border-top: 1px solid #151515;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1.5rem;
+      gap: 1rem;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: #a3a3a3;
+      max-width: 22rem;
+    }
+
+    /* Products */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      border-radius: 1.1rem;
+      border: 1px solid #222;
+      background: #080808;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .product-image {
+      border-radius: 0.9rem;
+      background: linear-gradient(135deg, #262626, #050505);
+      height: 180px;
+    }
+
+    .product-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .product-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: #b3b3b3;
+    }
+
+    .product-price {
+      font-weight: 600;
+      color: #f5f5f5;
+    }
+
+    .product-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid #333;
+    }
+
+    .product-actions {
+      margin-top: 0.4rem;
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .btn-small {
+      flex: 1;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid #444;
+      background: transparent;
+      color: #f5f5f5;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-small.primary {
+      background: #f5f5f5;
+      color: #050505;
+      border-color: #f5f5f5;
+    }
+
+    .btn-small:hover {
+      background: #111;
+      border-color: #777;
+    }
+
+    .btn-small.primary:hover {
+      background: #ffffff;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 2rem;
+    }
+
+    .about-text {
+      font-size: 0.95rem;
+      color: #d4d4d4;
+      max-width: 32rem;
+    }
+
+    .about-highlight {
+      margin-top: 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: 0.9rem;
+      border: 1px solid #222;
+      background: #080808;
+      font-size: 0.85rem;
+      color: #b3b3b3;
+    }
+
+    .about-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #a3a3a3;
+      margin-bottom: 0.4rem;
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 2rem;
+    }
+
+    .contact-info {
+      font-size: 0.9rem;
+      color: #d4d4d4;
+    }
+
+    .contact-info p + p {
+      margin-top: 0.5rem;
+    }
+
+    .contact-socials {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+    }
+
+    .contact-pill {
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid #333;
+      background: #080808;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #a3a3a3;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 0.7rem 0.8rem;
+      border-radius: 0.6rem;
+      border: 1px solid #333;
+      background: #050505;
+      color: #f5f5f5;
+      font-size: 0.9rem;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #777;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    footer {
+      border-top: 1px solid #151515;
+      padding: 1.5rem 1.5rem 2rem;
+      font-size: 0.8rem;
+      color: #777;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-links a {
+      opacity: 0.8;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+    }
+
+    @media (max-width: 800px) {
+      .hero,
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 2.2rem;
+      }
+
+      .hero-image {
+        order: -1;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <div class="logo">STEVEN CLOTHING</div>
+      <div class="nav-links">
+        <a href="#shop">Shop</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="btn-primary" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">
+        Shop Now
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div>
+        <div class="hero-tag">Streetwear for creators</div>
+        <h1 class="hero-title">Steven Clothing</h1>
+        <p class="hero-subtitle">
+          Streetwear built for creators, gamers, and real culture. Clean fits, bold energy, and everyday comfort that actually hits.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">
+            Shop New Drops
+          </button>
+          <button class="btn-ghost" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+            Learn the Story
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <div class="hero-pill">New Drop • Limited</div>
+        <div class="hero-card">
+          <div class="hero-card-title">Core Hoodie V1</div>
+          <div class="hero-card-text">
+            Heavyweight, soft interior, and a street fit that stands out without trying too hard.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Shop -->
+    <section id="shop">
+      <div class="section-header">
+        <h2 class="section-title">Shop</h2>
+        <p class="section-subtitle">
+          Hoodies, tees, and caps designed for everyday wear with a clean, modern street look.
+        </p>
+      </div>
+
+      <div class="product-grid">
+        <!-- Product 1 -->
+        <article class="product-card">
+          <div class="product-image"></div>
+          <div class="product-name">Steven Core Hoodie – Street Edition</div>
+          <div class="product-meta">
+            <span class="product-price">$70.00</span>
+            <span class="product-tag">Hoodie</span>
+          </div>
+          <div class="product-actions">
+            <button class="btn-small primary">Add to Cart</button>
+            <button class="btn-small">View</button>
+          </div>
+        </article>
+
+        <!-- Product 2 -->
+        <article class="product-card">
+          <div class="product-image"></div>
+          <div class="product-name">Minimal Logo Tee – Off White</div>
+          <div class="product-meta">
+            <span class="product-price">$35.00</span>
+            <span class="product-tag">T‑Shirt</span>
+          </div>
+          <div class="product-actions">
+            <button class="btn-small primary">Add to Cart</button>
+            <button class="btn-small">View</button>
+          </div>
+        </article>
+
+        <!-- Product 3 -->
+        <article class="product-card">
+          <div class="product-image"></div>
+          <div class="product-name">Steven Cap – Midnight Black</div>
+          <div class="product-meta">
+            <span class="product-price">$28.00</span>
+            <span class="product-tag">Cap</span>
+          </div>
+          <div class="product-actions">
+            <button class="btn-small primary">Add to Cart</button>
+            <button class="btn-small">View</button>
+          </div>
+        </article>
+
+        <!-- Product 4 -->
+        <article class="product-card">
+          <div class="product-image"></div>
+          <div class="product-name">Limited Drop Tee – Creator Mode</div>
+          <div class="product-meta">
+            <span class="product-price">$40.00</span>
+            <span class="product-tag">Limited</span>
+          </div>
+          <div class="product-actions">
+            <button class="btn-small primary">Add to Cart</button>
+            <button class="btn-small">View</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <div class="section-header">
+        <h2 class="section-title">About</h2>
+        <p class="section-subtitle">
+          The story, the mindset, and the reason Steven Clothing exists in the first place.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <div>
+          <p class="about-text">
+            Steven Clothing is a streetwear brand built from gaming culture, real‑life hustle, and creative energy.
+            Every piece is designed to feel good on body and look clean in any setting—from late‑night sessions to
+            daytime moves.
+          </p>
+          <p class="about-text" style="margin-top: 0.9rem;">
+            This brand is for people who create, grind, and express themselves through what they wear. No loud gimmicks,
+            just solid pieces with intention behind every detail.
+          </p>
+        </div>
+
+        <div class="about-highlight">
+          <div class="about-label">Mission</div>
+          <p>
+            To blend gaming culture with modern streetwear and give creators a uniform that matches their mindset:
+            focused, confident, and original.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="section-header">
+        <h2 class="section-title">Contact</h2>
+        <p class="section-subtitle">
+          Questions about orders, drops, or collabs? Reach out and let’s build something.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p>Email: <strong>support@stevenclothing.com</strong></p>
+          <p>Instagram: <strong>@StevenClothing</strong></p>
+          <p>TikTok: <strong>@StevenClothing</strong></p>
+
+          <div class="contact-socials">
+            <span class="contact-pill">Shipping &amp; orders</span>
+            <span class="contact-pill">Collabs &amp; promos</span>
+            <span class="contact-pill">Custom requests</span>
+          </div>
+        </div>
+
+        <form>
+          <div>
+            <label for="name">Name</label>
+            <input id="name" type="text" placeholder="Your name" />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@example.com" />
+          </div>
+          <div>
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="Tell us what’s up."></textarea>
+          </div>
+          <button type="submit" class="btn-primary">Send Message</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>© <span id="year"></span> Steven Clothing. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="#shop">Shop</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <span>Shipping &amp; Returns</span>
+        <span>Privacy</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
